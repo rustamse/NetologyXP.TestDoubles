@@ -1,7 +1,7 @@
 import assert from 'assert'
-import { Barman } from '../src/barmen'
-import { Client} from '../src/client'
-import { Cupboard} from '../src/cupboard'
+import {Barman} from '../src/barmen'
+import {Client} from '../src/client'
+import {Cupboard} from '../src/cupboard'
 
 
 suite('when client ask 200 grams of whisky', function () {
@@ -28,7 +28,7 @@ suite('when client ask 200 grams of whisky', function () {
         });
 
 
-        test('barman refuse client because he is drunken ', function() {
+        test('barman refuse client because he is drunken ', function () {
             var first = barman.pour(drinkName, 200, client);
             client.drink(first);
 
@@ -39,7 +39,7 @@ suite('when client ask 200 grams of whisky', function () {
     });
 
 
-    teardown(function() {
+    teardown(function () {
         console.log('teardown');
     })
 });

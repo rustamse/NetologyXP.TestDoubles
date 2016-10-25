@@ -1,8 +1,8 @@
 import assert from 'assert'
 import sinon from 'sinon'
-import { Barman } from '../src/barmen'
-import { Client} from '../src/client'
-import { Cupboard} from '../src/cupboard'
+import {Barman} from '../src/barmen'
+import {Client} from '../src/client'
+import {Cupboard} from '../src/cupboard'
 
 
 suite('Mock: when client ask 200 grams of whisky', function () {
@@ -17,7 +17,7 @@ suite('Mock: when client ask 200 grams of whisky', function () {
         });
     });
 
-    teardown(function() {
+    teardown(function () {
         console.log('teardown');
     })
 });
