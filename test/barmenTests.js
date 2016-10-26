@@ -55,6 +55,26 @@ suite('barmen pour whisky', function () {
                 cupboardMock.verify();
             });
 
+            test('barmen check if cupboard contains at least 200 grams of whisky', function () {
+                const clientStub = {
+                    isDrunken: function () {
+                        return false;
+                    }
+                };
+                var cupboard = new Cupboard();
+                var cupboardMock = sinon.mock(cupboard);
+                cupboardMock.expects('hasDrink')
+                    .withArgs(drinkName, clientAskVolume)
+                    .once()
+                    .returns(clientAskVolume);
+
+                var barman = new Barman(cupboard);
+
+                var volumeInGlass = barman.pour(drinkName, clientAskVolume, clientStub);
+
+                cupboardMock.verify();
+            });
+
             test('barman always check is client drunked', function () {
                 var client = new Client();
                 var clientMock = sinon.mock(client);
