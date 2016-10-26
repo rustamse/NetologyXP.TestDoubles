@@ -29,6 +29,8 @@ module.exports = {
 
         this._pourFromNextBottle = function (drinkName, remainedVolume) {
             let bottle = this.bottlesStore.getBottle(drinkName);
+            if(bottle === null)
+                throw new Error('Not found bottle with ' + drinkName);
 
             // смотрим достаточно ли в бутылке объема.
             let pourVolume = bottle.volume >= remainedVolume ?
