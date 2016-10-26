@@ -10,7 +10,10 @@ suite('BottlesStore has drink', function () {
 
         setup(function () {
             bottlesStore = new BottlesStore();
-            bottlesStore.addBottlesToStore([{name: 'whisky', volume: 500}, {name: 'tequila', volume: 500}, {name: 'tequila', volume: 500}]);
+            bottlesStore.addBottlesToStore([{name: 'whisky', volume: 500}, {
+                name: 'tequila',
+                volume: 500
+            }, {name: 'tequila', volume: 500}]);
         });
 
         test('BottlesStore has 300g of whisky', function () {
@@ -37,5 +40,38 @@ suite('BottlesStore has drink', function () {
             assert.equal(true, hasDrink);
         });
     });
+});
 
+suite('BottlesStore get bottle drink', function () {
+
+    suite('BottlesStore contains 1 bottle of whisky', function () {
+
+        var bottlesStore;
+
+        setup(function () {
+            bottlesStore = new BottlesStore();
+            bottlesStore.addBottlesToStore([{name: 'whisky', volume: 500}]);
+        });
+
+        test('obtained bottle of whisky', function () {
+            let askBottleName = 'whisky';
+
+            var obtainedBottle = bottlesStore.getBottle(askBottleName);
+
+            assert.equal(askBottleName, obtainedBottle.name);
+        });
+
+        test('Exception when obtained bottle of tequila', function () {
+            let askBottleName = 'tequila'
+
+            assert.throws(() => bottlesStore.getBottle(askBottleName), /Not found bottle at store/);
+        });
+
+        test('Exception when try to obtain second bottle of whisky', function () {
+            let askBottleName = 'whisky';
+
+            var obtainedBottle = bottlesStore.getBottle(askBottleName);
+            assert.throws(() => bottlesStore.getBottle(askBottleName), /Not found bottle at store/);
+        });
+    });
 });
