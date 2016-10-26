@@ -48,6 +48,8 @@ suite('barmen pour whisky', function () {
                     .withArgs(drinkName, clientAskVolume)
                     .once()
                     .returns(clientAskVolume);
+                cupboardMock.expects('hasDrink')
+                    .returns(clientAskVolume);
 
                 var barman = new Barman(cupboard);
 
@@ -64,6 +66,8 @@ suite('barmen pour whisky', function () {
                 };
                 var cupboard = new Cupboard(new BottlesStore());
                 var cupboardMock = sinon.mock(cupboard);
+                cupboardMock.expects('getDrink')
+                    .returns(clientAskVolume);
                 cupboardMock.expects('hasDrink')
                     .withArgs(drinkName, clientAskVolume)
                     .once()
