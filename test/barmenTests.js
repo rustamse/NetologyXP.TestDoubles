@@ -3,6 +3,7 @@ import sinon from 'sinon'
 import {Barman} from '../src/barmen'
 import {Client} from '../src/client'
 import {Cupboard} from '../src/cupboard'
+import {BottlesStore} from '../src/bottlesStore'
 
 suite('barmen pour whisky', function () {
     const drinkName = 'whisky';
@@ -41,7 +42,7 @@ suite('barmen pour whisky', function () {
                         return false;
                     }
                 };
-                var cupboard = new Cupboard();
+                var cupboard = new Cupboard(new BottlesStore());
                 var cupboardMock = sinon.mock(cupboard);
                 cupboardMock.expects('getDrink')
                     .withArgs(drinkName, clientAskVolume)
@@ -61,7 +62,7 @@ suite('barmen pour whisky', function () {
                         return false;
                     }
                 };
-                var cupboard = new Cupboard();
+                var cupboard = new Cupboard(new BottlesStore());
                 var cupboardMock = sinon.mock(cupboard);
                 cupboardMock.expects('hasDrink')
                     .withArgs(drinkName, clientAskVolume)

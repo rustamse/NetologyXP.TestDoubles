@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-    Cupboard: function () {
+    Cupboard: function (bottlesStore) {
         this.isOpen = function () {
             /**/
             return true;
