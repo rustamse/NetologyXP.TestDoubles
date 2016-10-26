@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-    BottlesStoreFake: function () {
+    BottlesStoreFake_1whisky_2tequila: function () {
         this._whisky1 = {name: 'whisky', volume: 500};
         this._tequila1 = {name: 'tequila', volume: 500};
         this._tequila2 = {name: 'tequila', volume: 500};
