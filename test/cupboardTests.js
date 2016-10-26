@@ -42,4 +42,38 @@ suite('Cupboard contains in BottlesStore 1 bottle of whisky and 2 bottles of teq
         });
 
     });
+
+    suite('Cupboard get drink', function () {
+
+        test('Cupboard get 200g of whisky', function () {
+            const drinkName = 'whisky';
+            const askVolume = 200;
+
+            var cupboard = new Cupboard(new BottlesStoreFake_1whisky_2tequila());
+
+            var obtainedVolume = cupboard.getDrink(drinkName, askVolume);
+
+            assert.equal(askVolume, obtainedVolume);
+        });
+
+        test('EXCEPT when Cupboard get 600g of whisky', function () {
+            const drinkName = 'whisky';
+            const askVolume = 600;
+
+            var cupboard = new Cupboard(new BottlesStoreFake_1whisky_2tequila());
+
+            assert.throws(() => cupboard.getDrink(drinkName, askVolume));
+        });
+
+        test('Cupboard get 800g of tequila', function () {
+            const drinkName = 'tequila';
+            const askVolume = 800;
+
+            var cupboard = new Cupboard(new BottlesStoreFake_1whisky_2tequila());
+
+            var obtainedVolume = cupboard.getDrink(drinkName, askVolume);
+
+            assert.equal(askVolume, obtainedVolume);
+        });
+    });
 });
