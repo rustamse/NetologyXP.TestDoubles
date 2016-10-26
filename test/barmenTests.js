@@ -1,6 +1,8 @@
 import assert from 'assert'
+import sinon from 'sinon'
 import {Barman} from '../src/barmen'
 import {Client} from '../src/client'
+import {Cupboard} from '../src/cupboard'
 
 suite('barmen pour whisky', function () {
     const drinkName = 'whisky';
@@ -8,7 +10,7 @@ suite('barmen pour whisky', function () {
     suite('when client ask 200 grams', function () {
         const clientAskVolume = 200;
 
-        suite('barman has enough', function () {
+        suite('barmen has enough', function () {
 
             const cupboardStub = {
                 hasDrink: function () {
@@ -33,7 +35,27 @@ suite('barmen pour whisky', function () {
                 assert.equal(clientAskVolume, volumeInGlass);
             });
 
-            test('barman refused because client is drunked', function () {
+            test('barmen took 200 grams of whisky from cupboard', function () {
+                const clientStub = {
+                    isDrunken: function () {
+                        return false;
+                    }
+                };
+                var cupboard = new Cupboard();
+                var cupboardMock = sinon.mock(cupboard);
+                cupboardMock.expects('getDrink')
+                    .withArgs(drinkName, clientAskVolume)
+                    .once()
+                    .returns(clientAskVolume);
+
+                var barman = new Barman(cupboard);
+
+                var volumeInGlass = barman.pour(drinkName, clientAskVolume, clientStub);
+
+                cupboardMock.verify();
+            });
+
+            test('barmen refused because client is drunked', function () {
                 const clientStub = {
                     isDrunken: function () {
                         return true;
