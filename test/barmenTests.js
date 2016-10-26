@@ -35,7 +35,7 @@ suite('barmen pour whisky', function () {
                 assert.equal(clientAskVolume, volumeInGlass);
             });
 
-            test('barmen took 200 grams of whisky from cupboard', function () {
+            test('barmen took exactly 200 grams of whisky from cupboard', function () {
                 const clientStub = {
                     isDrunken: function () {
                         return false;
@@ -53,6 +53,20 @@ suite('barmen pour whisky', function () {
                 var volumeInGlass = barman.pour(drinkName, clientAskVolume, clientStub);
 
                 cupboardMock.verify();
+            });
+
+            test('barman always check is client drunked', function () {
+                var client = new Client();
+                var clientMock = sinon.mock(client);
+                clientMock.expects('isDrunken')
+                    .once()
+                    .returns(false);
+
+                var barman = new Barman(cupboardStub);
+
+                var volumeInGlass = barman.pour(drinkName, clientAskVolume, client);
+
+                clientMock.verify();
             });
 
             test('barmen refused because client is drunked', function () {
